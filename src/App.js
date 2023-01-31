@@ -12,8 +12,10 @@ function App() {
   const UploadImage =()=>{
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name +v4()} `)
-    uploadBytes(imageRef,imageUpload).then(() =>{
-      alert('imageUploader')
+    uploadBytes(imageRef,imageUpload).then((snapshot) =>{
+    getDownloadURL(snapshot.ref).then((url) =>{
+    setImageList((prev) =>[...prev,url])
+     })
     })
   }
       useEffect(()=>{ 
